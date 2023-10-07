@@ -1,0 +1,30 @@
+# Importing the data in R
+cluster_data <- read.csv("scluster.csv")
+
+# Installing the ggplot2 package
+install.packages("ggplot2")
+
+# importing the package
+library(ggplot2)
+
+# mentioning the graph dimensions
+options(repr.plot.width = 4, repr.plot.height =1.5)
+
+# start writing the ggplot function giving the data, boxplot size and color, and label description
+ggplot(cluster_data, aes(x=Cluster, y=Water.use, fill=Cluster)) + #assign x and y axis variable to the boxplot
+  geom_boxplot(alpha=0.3, fatten = 1.5, lwd=0.5) + #boxplot size
+  geom_boxplot(width=.75)+ # boxplot width
+  theme_bw()+ #white background
+  theme_light()+ #light grey grid lines
+  theme(legend.position="none") + # "none" remove the legends if you dont want. remove all the code in this line if you want legends.
+  scale_fill_manual(values=c("#E74C70", "#43A047", "#566BE9", "#DC7633", "#1ABC9C"))+
+  theme(axis.text.x=element_text(size=15,face="bold"), #x label size and font
+        axis.text.y = element_text(size = 15,face="bold"))+ #y label size and font
+  theme(axis.title.x = element_text(margin = margin(t = 50)))+ #x axis title distance from graph
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.75, hjust=0.75))+ #x axis label angle to fit into the graph. It is advised when x ale title are long. 
+  theme(text = element_text(size = 25)) + #x and y axis title size
+  labs(y= "Water use (kg)", face ="bold") # assigning title to y axis
+# incase you need to write superscript or subscript in title, use following code
+  labs(y= Total~root~surface~area~(cm^2)) # use tilde operator "~" seprating each words in title and it also work like space and use parenthesis with caret operator "^" followed by superscript letetrs or numbers. 
+#use tilde operator follwoed by big bracket for subscript
+labs(y= Total~root~surface~area~(cm[2])
